@@ -58,7 +58,34 @@ class Square extends React.Component {
 
 ## Props
 
-\- 부모 ->자식 컴포넌트로 전달되는 객체.
+\- '부모 -> 자식' 컴포넌트로 전달되는 객체.
+ex) 
+```jsx
+function Square(props) {
+  return (
+    // 부모로부터 받은 props 
+    <div>{props.value}</div>
+  );
+}
+
+class Board extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value : "text",
+    }
+  }
+  
+  render() {
+    return (
+      <div>
+        // 자식으로 props 전달
+        <Square value={this.state.value} />
+      </div>
+    )
+  }
+}
+```
 
 <br>
 
