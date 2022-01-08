@@ -14,7 +14,7 @@
 
 ex)
 
-```react
+```jsx
 <div>{ JS Expression }</div>
 ```
 
@@ -38,7 +38,7 @@ ex)
 
 ex) 
 
-```react
+```jsx
 class Square extends React.Component {
   constructor(props) {
     super(props);
@@ -70,7 +70,7 @@ class Square extends React.Component {
 
 ex)
 
-```react
+```jsx
 // Parent Component
 class Parent extends React.component {
   constructor(props) {
@@ -143,7 +143,7 @@ class Child extends React.componenet {
 
 ex)
 
-```react
+```jsx
 class Board extends React.Componenet {
   constructor(props) {
     super(props);
@@ -186,7 +186,7 @@ class Board extends React.Componenet {
 
 ex)
 
-```react
+```jsx
 <li key={user.id}>{user.taskCount} tasks left</li>
 ```
 
