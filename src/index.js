@@ -4,7 +4,7 @@ import './index.css'
 
 function Square(props) {
     return (
-      <button className="square" onClick={props.onClick}>
+      <button className={props.className} onClick={props.onClick}>
         {props.value}
       </button>
     );
@@ -17,6 +17,8 @@ function Square(props) {
           key={i}
           value={this.props.squares[i]}
           onClick={() => this.props.onClick(i)}
+          //className={(this.props.position && (this.props.position.indexOf(i) !== -1)) ? ["highlight", "square"].join(' ') : "square"}
+          className={(this.props.winner && (this.props.winner.position.indexOf(i) !== -1)) ? ["highlight", "square"].join(' ') : "square"}
         />
       );
     }
@@ -52,7 +54,8 @@ function Square(props) {
         xIsNext : true,
         stepNumber : 0,
         highlight : false,
-        b_asending : true
+        b_asending : true,
+        position : null
       }
     }
 
@@ -61,9 +64,16 @@ function Square(props) {
       const current = history[history.length - 1];
       const squares = current.squares.slice();
       const winner = calculateWinner(squares);
-      if(winner || squares[i]) {
-        return;
-      }                  
+
+      if(winner) {
+        const position = winner.position;
+        this.setState({
+          position : position,
+        })
+        return
+      }
+      if(squares[i]) return;
+    
       squares[i] = (this.state.xIsNext ? "X" : "O");
 
       const metrics =  {
@@ -108,9 +118,10 @@ function Square(props) {
       const current = history[this.state.stepNumber];
       const squares = current.squares.slice();
       const winner = calculateWinner(squares);
+
       let status;
       if(winner) {
-        status = `Winner is : ${winner}`
+        status = `Winner is : ${winner.winner}`;
       } else if(this.state.stepNumber === 9) {
         status = 'DRAW';
       } else {
@@ -142,6 +153,8 @@ function Square(props) {
             <Board
               onClick={(i) => this.handleClick(i)}
               squares={squares}
+              // position={this.state.position}
+              winner={winner}
             />
           </div>
           <div className="game-info">
@@ -175,7 +188,7 @@ function Square(props) {
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i];
       if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-        return squares[a];
+        return { winner : squares[a] , position : [a, b, c] };
       }
     }
     return null;
