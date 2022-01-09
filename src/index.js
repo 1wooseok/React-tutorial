@@ -51,6 +51,8 @@ function Square(props) {
         ],
         xIsNext : true,
         stepNumber : 0,
+        highlight : false,
+        b_asending : true
       }
     }
 
@@ -88,6 +90,15 @@ function Square(props) {
         {
           stepNumber : step,
           xIsNext : (step%2) === 0,
+          highlight : true,
+        }
+      )
+    }
+
+    toggleOrder() {
+      this.setState(
+        {
+          b_asending : !this.state.b_asending,
         }
       )
     }
@@ -104,6 +115,7 @@ function Square(props) {
         status = `Next Player is : ${(this.state.xIsNext ? "X" : "O")}`;
       }
 
+      const order = this.state.b_asending ? '역순' : '원래대로';
       const moves = history.map((step, move) => {
         const desc = move ?
         `Go To # ${move} ( ${history[move].metrics.col}, ${history[move].metrics.row} )`:
@@ -112,12 +124,17 @@ function Square(props) {
           <li key={move}>
             <button
               onClick={() => this.jumpTo(move)}
+              className={(move === (history.length - 1) && this.state.highlight) ? "highlight" : ''}
             >
             {desc}
             </button>
           </li>
         );
       })
+      if(!this.state.b_asending) {
+        moves.reverse();
+      }
+
       return (
         <div className="game">
           <div className="game-board">
@@ -128,6 +145,7 @@ function Square(props) {
           </div>
           <div className="game-info">
             <div>{status}</div>
+            <button onClick={() => this.toggleOrder()}>{order}</button>
             <ol>{moves}</ol>
           </div>
         </div>
