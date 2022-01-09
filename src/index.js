@@ -111,12 +111,16 @@ function Square(props) {
       let status;
       if(winner) {
         status = `Winner is : ${winner}`
+      } else if(this.state.stepNumber === 9) {
+        status = 'DRAW';
       } else {
         status = `Next Player is : ${(this.state.xIsNext ? "X" : "O")}`;
       }
 
+      const new_history = (this.state.b_asending ? history : history.reverse())
+
       const order = this.state.b_asending ? '역순' : '원래대로';
-      const moves = history.map((step, move) => {
+      const moves = new_history.map((step, move) => {
         const desc = move ?
         `Go To # ${move} ( ${history[move].metrics.col}, ${history[move].metrics.row} )`:
         `Game Start !`;
@@ -131,9 +135,6 @@ function Square(props) {
           </li>
         );
       })
-      if(!this.state.b_asending) {
-        moves.reverse();
-      }
 
       return (
         <div className="game">
