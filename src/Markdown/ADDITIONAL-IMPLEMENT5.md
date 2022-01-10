@@ -49,6 +49,12 @@ state가 변경 되었으므로 이제 무언가 다시 rendering되는 상황�
 
 변경할 index를 담고있는 position배열을 Square컴포넌트 까지 쭉 전달해주겠다.
 
+\* 이때 Square 컴포넌트에는 직접 position을 전달하는 대신, Board컴포넌트에서 className을 지정해 전달하겠다.
+
+Square 컴포넌트에는 전달받은 position과 비교할 사각형의 번호(i)를 갖고있지 않기때문에
+
+Board에서 비교후, 결과인 className 전달하겠다.
+
 ```jsx
 class Game extends React.Component {
   render() {
@@ -78,7 +84,10 @@ class Board extends React.Component {
 
 function Square(props) {
   return (
-    <button className={props.className} onClick={props.onClick}> // props로 전달받은 className에 따라 스타일 변경
+    <button
+      className={props.className}
+      onClick={props.onClick} // props로 전달받은 className에 따라 스타일 변경
+    > 
       {props.value}
     </button>
   );
@@ -87,6 +96,7 @@ function Square(props) {
 ```
 
 ```css
+/* ./index.css */
  .highlight {
     color : #60d9f5;
   }
