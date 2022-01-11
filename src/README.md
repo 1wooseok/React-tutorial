@@ -52,8 +52,12 @@ class Square extends React.Component {
 
 ## setState()
 \- React는 state의 변화를 감지하여, 변경된 state가 사용된 모든 컴포넌트를 다시 렌더링함.
+
 \- (즉 render함수가 다시 호출됨)
+
 <b>\* setState호출은 비동기적으로 이뤄진다. 따라서 setState 호출 직후 새로운 값이 this.state에 반영된다고 생각하면 안된다.</b>
+
+( https://ko.reactjs.org/docs/faq-state.html#what-is-the-difference-between-state-and-props )
 
 <br>
 
