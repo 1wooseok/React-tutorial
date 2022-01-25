@@ -22,7 +22,7 @@ ex)
 
 ## render()
 
-\- 모든 컴포넌트는 'render()'라는 함수를 갖는다.
+\- DOM Tree를 만들때 render함수가 반환한 JSX를 렌더링함.
 
 <br>
 
