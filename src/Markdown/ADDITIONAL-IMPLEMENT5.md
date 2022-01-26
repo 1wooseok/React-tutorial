@@ -103,3 +103,15 @@ Game Component에서 this.state.position을 넘겨주게되면
 게임이 끝나고 클릭을 한번 더해야 스타일이 변경된다.
 
 왜 그런지는 아직 찾지 못했다..
+
+\-> 2022-01-26 
+
+Game 컴포넌트에서 props로 winner를 전달할때, winner는 함수의 return값이므로 
+
+함수가 return한 값이 바로 반영이 되지만,
+
+this.state.position을 props로 주면, setState가 비동기로 처리되기 때문에 
+
+setState가 실행되어도 props를 전달하는 순간에는 업데이트가 되지 않았기 때문에
+
+이전 state가 props로 전달이 되고나서야 state가 업데이트 되기때문에, 한번 더 클릭해야 업데이트 된 state값으로 화면을 그리는 것 같다. 

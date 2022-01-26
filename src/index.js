@@ -4,7 +4,10 @@ import './index.css'
 
 function Square(props) {
     return (
-      <button className={props.className} onClick={props.onClick}>
+      <button
+        className={props.className}
+        onClick={props.onClick}
+      >
         {props.value}
       </button>
     );
@@ -17,7 +20,6 @@ function Square(props) {
           key={i}
           value={this.props.squares[i]}
           onClick={() => this.props.onClick(i)}
-          //className={(this.props.position && (this.props.position.indexOf(i) !== -1)) ? ["highlight", "square"].join(' ') : "square"}
           className={(this.props.winner && (this.props.winner.position.indexOf(i) !== -1)) ? ["highlight", "square"].join(' ') : "square"}
         />
       );
@@ -153,7 +155,6 @@ function Square(props) {
             <Board
               onClick={(i) => this.handleClick(i)}
               squares={squares}
-              // position={this.state.position}
               winner={winner}
             />
           </div>
